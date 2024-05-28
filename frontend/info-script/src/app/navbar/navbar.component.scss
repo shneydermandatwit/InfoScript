@@ -1,0 +1,38 @@
+$shadow: rgb(229, 229, 229);
+
+.logo{
+    object-fit: contain;
+    height: 30px;
+}
+
+nav{
+    height: 30px;
+    border-bottom: solid 1px $shadow;
+    margin: 0px;
+    display: flex;
+    box-shadow: 0px 5px 25px $shadow;
+}
+
+
+
+.account-options{
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+    height: 100%;
+}
+
+.account-options > div{
+    padding: 5px;
+    
+}
+
+.account-options > div *{
+    color: black;
+    text-decoration: none;
+}
+
+.account-options > div:hover{
+    background-color:$shadow;
+    border-radius: 5%;
+}
