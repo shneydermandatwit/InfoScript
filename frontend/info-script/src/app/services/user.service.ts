@@ -15,8 +15,6 @@ export class UserService {
 
   login(email:string, password:string){
     console.log("login: ",email,password)
-    //const {user,token}
-    //https://ratemywit-gbxs.onrender.com/user/login
     this.httpClient.post("https://ratemywit-gbxs.onrender.com/user/login",{email:email, password:password}).subscribe({
       next: (response: any) => {
         console.log('Login successful', response);

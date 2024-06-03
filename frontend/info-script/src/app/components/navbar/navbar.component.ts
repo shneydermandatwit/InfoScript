@@ -16,16 +16,19 @@ import { inject } from '@angular/core';
           src="https://smb.ibsrv.net/imageresizer/image/blog_images/1200x1200/59846/176287/0044181001582748537.jpg"
         />
       </a>
+      <div class="clickable">
+          <a [routerLink]="['/upload']"> Upload </a>
+      </div>
       <div class="account-options">
         @if(!isLoggedIn){
-        <div>
+        <div class="clickable">
           <a [routerLink]="['/login']"> Login </a>
         </div>
-        <div>
+        <div class="clickable">
           <a [routerLink]="['/register']"> Register </a>
         </div>
         }@else {
-        <div>
+        <div class="clickable">
           <a [routerLink]="['']" (click)="logout()"> Logout </a>
         </div>
         }

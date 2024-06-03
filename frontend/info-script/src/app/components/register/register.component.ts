@@ -15,7 +15,7 @@ import { RouterModule } from '@angular/router';
           </label>
           <input id="email" type="text" formControlName="email">
           <label for="password">
-            Last Name
+            Password
           </label>
           <input id="password" type="text" formControlName="password">
         <button type="submit" class="primary">Register</button>
