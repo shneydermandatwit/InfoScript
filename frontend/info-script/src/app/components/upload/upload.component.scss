@@ -84,3 +84,8 @@
 input[type="file"]{
     margin: 0;
 }
+
+button[type="submit"]:disabled {
+  background-color: #cccccc; /* Grey color */
+  cursor: not-allowed; /* Change cursor to not-allowed */
+}

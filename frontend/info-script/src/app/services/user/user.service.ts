@@ -1,6 +1,7 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { Router } from '@angular/router';
 
 
 @Injectable({
@@ -10,7 +11,12 @@ export class UserService {
   private loggedInSubject = new BehaviorSubject<boolean>(false);
   loggedIn$:Observable<boolean> = this.loggedInSubject.asObservable();
   httpClient = inject(HttpClient);
+  router = inject(Router);
   constructor() { 
+    const token: string | null = localStorage.getItem("token");
+    if(token){
+      this.loggedInSubject.next(true);
+    }
   }
 
   login(email:string, password:string){
@@ -20,7 +26,8 @@ export class UserService {
         console.log('Login successful', response);
         this.loggedInSubject.next(true);
         localStorage.setItem('token',response.token)
-        console.log(localStorage.getItem('token'))
+        this.router.navigate(['/upload']);
+
       },
       error: (error) => {
         console.error('Login failed', error);
