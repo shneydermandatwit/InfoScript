@@ -1,8 +1,7 @@
 $shadow: rgb(229, 229, 229);
 
 .logo{
-    object-fit: contain;
-    height: 30px;
+    height: 100%;
 }
 
 nav{
@@ -22,17 +21,17 @@ nav{
     height: 100%;
 }
 
-.account-options > div{
+.clickable{
     padding: 5px;
     
 }
 
-.account-options > div *{
+*{
     color: black;
     text-decoration: none;
 }
 
-.account-options > div:hover{
+.clickable:hover{
     background-color:$shadow;
     border-radius: 5%;
 }

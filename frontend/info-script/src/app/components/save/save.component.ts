@@ -1,16 +1,16 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-home',
+  selector: 'app-save',
   standalone: true,
   imports: [],
   template: `
     <p>
-      home works!
+      save works!
     </p>
   `,
-  styleUrl: './home.component.scss'
+  styleUrl: './save.component.scss'
 })
-export class HomeComponent {
+export class SaveComponent {
 
 }
