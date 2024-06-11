@@ -1,5 +1,6 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { SaveService } from '../save/save.service';
 
 @Injectable({
   providedIn: 'root'
@@ -9,6 +10,7 @@ export class UploadService {
 
 
   httpClient = inject(HttpClient);
+  saveService = inject(SaveService);
 
   upload(file:File, summarize:boolean){
 
@@ -22,7 +24,22 @@ export class UploadService {
 
     const url = `https://api.deepgram.com/v1/listen?summarize=${summarize?'v2':'false'}&smart_format=true&language=en&model=nova-2`;
 
-    return this.httpClient.post(url,file,{headers})
+    this.httpClient.post(url,file,{headers}).subscribe({
+      next: (response: any) => {
+        if(summarize){
+          this.saveService.summary = response.results.summary.short;
+        }
+          this.saveService.transcript = response.results.channels[0].alternatives[0].transcript;
+          this.saveService.fileName = file.name;
+          console.log(response);
+      },
+      error: (error) => {
+        console.log('error:', error);
+      },
+      complete: () => {
+        console.log('completed upload');
+      }
+    });
   }
 
   constructor() {

@@ -14,6 +14,10 @@ import { RouterModule } from '@angular/router';
             Email
           </label>
           <input id="email" type="text" formControlName="email">
+          <label for="displayName">
+            Display Name
+          </label>
+          <input id="displayName" type="text" formControlName="displayName">
           <label for="password">
             Password
           </label>
@@ -33,6 +37,7 @@ export class RegisterComponent {
 
   registerForm = new FormGroup({
     email: new FormControl(''),
+    displayName: new FormControl(''),
     password: new FormControl('')
   })
 
@@ -40,6 +45,7 @@ export class RegisterComponent {
   handleSubmit(){
     this.userService.register(
       this.registerForm.value.email ?? '',
+      this.registerForm.value.displayName ?? '',
       this.registerForm.value.password ?? ''
     )
   }
