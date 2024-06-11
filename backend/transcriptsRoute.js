@@ -23,8 +23,10 @@ transcriptsRoute.post('/save', async (req, res) => {
 
         const newTranscript = {
             title: req.body.title,
+            fileName: req.body.fileName,
             transcript: req.body.transcript,
-            creator: req.body.creator
+            summary: req.body.summary,
+            creator: email
         }
         const transcription = await Transcript.create(newTranscript);
 

@@ -2,6 +2,7 @@ import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Router } from '@angular/router';
+import { ROOT } from '../../baseUrl';
 
 
 @Injectable({
@@ -21,7 +22,7 @@ export class UserService {
 
   login(email:string, password:string){
     console.log("login: ",email,password)
-    this.httpClient.post("https://ratemywit-gbxs.onrender.com/user/login",{email:email, password:password}).subscribe({
+    this.httpClient.post(`${ROOT}/user/login`,{email:email, password:password}).subscribe({
       next: (response: any) => {
         console.log('Login successful', response);
         this.loggedInSubject.next(true);
@@ -38,8 +39,20 @@ export class UserService {
     });
   }
 
-  register(email:string, password:string){
-    console.log("register: ",email,password)
+  register(email:string, displayName:string, password:string){
+    console.log("register: ",email,displayName, password)
+    this.httpClient.post(`${ROOT}/user/register`,{email:email, displayName:displayName, password:password}).subscribe({
+      next: (response: any) => {
+        console.log('Registration successful', response);
+        this.router.navigate(['/login']);
+      },
+      error: (error) => {
+        console.error('Login failed', error);
+      },
+      complete: () => {
+        console.log('Request completed');
+      }
+    });
   }
 
   logout(){
