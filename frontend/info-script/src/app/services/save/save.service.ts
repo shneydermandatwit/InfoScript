@@ -1,11 +1,27 @@
-import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Injectable, inject } from '@angular/core';
+import { ROOT } from '../../baseUrl';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class SaveService {
-  newTranscript: string | undefined;
-  newSummary: string | undefined;
+  httpClient = inject(HttpClient);
+  url = `${ROOT}/transcripts/save`;
 
-  constructor() { }
+  //title: string = '';
+  fileName: string = '';
+  transcript: string = '';
+  summary: string = '';
+
+  save(title:string) {
+    return this.httpClient.post(this.url, {
+      title: title,
+      fileName: this.fileName,
+      transcript: this.transcript,
+      summary: this.summary,
+    });
+  }
+
+  constructor() {}
 }
