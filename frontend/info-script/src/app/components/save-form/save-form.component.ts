@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { SaveService } from '../../services/save/save.service';
+import { TranscriptService } from '../../services/transcript/transcript.service';
 import { ReactiveFormsModule, FormGroup, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 
@@ -10,15 +10,15 @@ import { Router } from '@angular/router';
   template: `
     <div>
       File name:
-      {{ saveService.fileName }}
+      {{ transcriptService.fileName }}
     </div>
     <div>
       Transcript:
-      {{ saveService.transcript }}
+      {{ transcriptService.transcript }}
     </div>
     <div>
-      @if(saveService.summary){ Summary:
-      {{ saveService.summary }}
+      @if(transcriptService.summary){ Summary:
+      {{ transcriptService.summary }}
       }
     </div>
     <div>
@@ -37,7 +37,7 @@ import { Router } from '@angular/router';
   styleUrl: './save-form.component.scss',
 })
 export class SaveFormComponent {
-  saveService = inject(SaveService);
+  transcriptService = inject(TranscriptService);
   router = inject(Router);
 
   saveForm = new FormGroup({
@@ -45,7 +45,7 @@ export class SaveFormComponent {
   });
 
 save(){
-  this.saveService.save(this.saveForm.value.title as string).subscribe({
+  this.transcriptService.save(this.saveForm.value.title as string).subscribe({
     next:(response:any)=>{
       console.log(response)
       this.router.navigate(['/transcripts'])

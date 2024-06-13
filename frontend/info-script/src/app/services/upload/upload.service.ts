@@ -1,6 +1,6 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { SaveService } from '../save/save.service';
+import { TranscriptService } from '../transcript/transcript.service';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +10,7 @@ export class UploadService {
 
 
   httpClient = inject(HttpClient);
-  saveService = inject(SaveService);
+  transcriptService = inject(TranscriptService);
 
   upload(file:File, summarize:boolean){
 
@@ -27,10 +27,10 @@ export class UploadService {
     this.httpClient.post(url,file,{headers}).subscribe({
       next: (response: any) => {
         if(summarize){
-          this.saveService.summary = response.results.summary.short;
+          this.transcriptService.summary = response.results.summary.short;
         }
-          this.saveService.transcript = response.results.channels[0].alternatives[0].transcript;
-          this.saveService.fileName = file.name;
+          this.transcriptService.transcript = response.results.channels[0].alternatives[0].transcript;
+          this.transcriptService.fileName = file.name;
           console.log(response);
       },
       error: (error) => {
