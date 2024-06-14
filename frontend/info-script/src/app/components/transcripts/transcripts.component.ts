@@ -3,11 +3,12 @@ import { TranscriptService } from '../../services/transcript/transcript.service'
 import { CommonModule } from '@angular/common';
 import { OnInit } from '@angular/core';
 import { Observable, Subject, takeUntil,of, from } from 'rxjs';
+import { TimeAgoPipe } from '../../pipes/time-ago.pipe';
 
 @Component({
   selector: 'app-transcripts',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, TimeAgoPipe],
   template: `
     <p>
       transcripts works!
@@ -15,7 +16,18 @@ import { Observable, Subject, takeUntil,of, from } from 'rxjs';
     </p>
     <button (click)="getTranscripts()">Get</button>
     <ng-container *ngIf="transcripts$ | async as transcripts">
-      {{transcripts | json}}
+      <ul class="transcript-list">
+        <li *ngFor="let transcript of transcripts" class="transcript-item">
+          <h1>{{transcript.title}}</h1>
+          <h3>{{transcript.fileName}}</h3>
+          <p>Transcript:<br>{{transcript.transcript}}</p>
+          <p *ngIf="transcript.summary">Summary:<br>{{transcript.summary}}</p>
+          <p>{{transcript.createdAt | timeAgo }}</p>
+
+
+          <hr>
+        </li>
+      </ul>
     </ng-container>
     <hr>
   `,
