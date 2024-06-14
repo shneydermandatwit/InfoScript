@@ -13,11 +13,17 @@ import { inject } from '@angular/core';
       <a [routerLink]="['']">
         <img
           class="logo"
-          src="https://smb.ibsrv.net/imageresizer/image/blog_images/1200x1200/59846/176287/0044181001582748537.jpg"
+          src="InfoScriptLogo.png"
         />
       </a>
+      <div class="name">
+        InfoScript
+        </div>
       
       <div class="account-options">
+        <div class="clickable">
+          <a> About </a>
+          </div>
         @if(!isLoggedIn){
           
         <div class="clickable">

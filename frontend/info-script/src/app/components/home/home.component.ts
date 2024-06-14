@@ -8,12 +8,16 @@ import { Component } from '@angular/core';
     <body>
   <header>
     <div class="container">
-      <h1>InfoScript</h1>
       <p>Effortlessly transcribe and summarize your audio files</p>
       <a href="#features" class="btn-primary">Learn More</a>
     </div>
   </header>
   <main>
+    <section id="photo">
+      <div>
+        <img src = "https://www.onlygfx.com/wp-content/uploads/2022/03/colorful-sound-wave-equalizer-4.png">
+        </div>
+      </section>
     <section id="features">
       <div class="container">
         <h2>Features</h2>
