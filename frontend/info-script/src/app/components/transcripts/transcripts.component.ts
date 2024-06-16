@@ -4,6 +4,8 @@ import { CommonModule } from '@angular/common';
 import { OnInit } from '@angular/core';
 import { Observable, Subject, takeUntil,of, from } from 'rxjs';
 import { TimeAgoPipe } from '../../pipes/time-ago.pipe';
+import { Router } from '@angular/router';
+import { Transcript } from '../../models/transcript';
 
 @Component({
   selector: 'app-transcripts',
@@ -18,11 +20,14 @@ import { TimeAgoPipe } from '../../pipes/time-ago.pipe';
     <ng-container *ngIf="transcripts$ | async as transcripts">
       <ul class="transcript-list">
         <li *ngFor="let transcript of transcripts" class="transcript-item">
+          
           <h1>{{transcript.title}}</h1>
           <h3>{{transcript.fileName}}</h3>
           <p>Transcript:<br>{{transcript.transcript}}</p>
           <p *ngIf="transcript.summary">Summary:<br>{{transcript.summary}}</p>
           <p>{{transcript.createdAt | timeAgo }}</p>
+          <button (click)="getDetail(transcript._id)">Details</button>
+          
 
 
           <hr>
@@ -35,8 +40,10 @@ import { TimeAgoPipe } from '../../pipes/time-ago.pipe';
 })
 export class TranscriptsComponent implements OnInit,OnDestroy {
   transcriptService = inject(TranscriptService);
-  transcripts$ = this.transcriptService.transcripts$;
+  router = inject(Router);
+  transcripts$ : Observable<Transcript[]> = this.transcriptService.transcripts$;
   destroy$ = new Subject<void>();
+
 
 
   ngOnInit():void {
@@ -46,6 +53,10 @@ export class TranscriptsComponent implements OnInit,OnDestroy {
   ngOnDestroy(): void {
       this.destroy$.next();
       this.destroy$.complete();
+  }
+
+  getDetail(id:string){
+    this.router.navigate(['/transcripts', id])
   }
 
   getTranscripts(){

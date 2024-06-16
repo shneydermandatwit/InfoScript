@@ -1,7 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { ROOT } from '../../baseUrl';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable,map } from 'rxjs';
+import { Transcript } from '../../models/transcript';
 
 @Injectable({
   providedIn: 'root',
@@ -11,7 +12,7 @@ export class TranscriptService {
   saveUrl = `${ROOT}/transcripts/save`;
   getUrl = `${ROOT}/transcripts`
 
-  private transcriptsSubject = new BehaviorSubject<any>(null);
+  private transcriptsSubject = new BehaviorSubject<Transcript[]>([]);
   transcripts$ = this.transcriptsSubject.asObservable();
 
   fileName: string = '';
@@ -33,6 +34,12 @@ export class TranscriptService {
 
   updateTranscripts(response:any):void{
     this.transcriptsSubject.next(response)
+  }
+
+  getTranscriptById(id: string): Observable<Transcript | undefined> {
+    return this.transcripts$.pipe(
+      map(transcripts => transcripts.find(transcript => transcript._id === id))
+    );
   }
 
   constructor() {}
