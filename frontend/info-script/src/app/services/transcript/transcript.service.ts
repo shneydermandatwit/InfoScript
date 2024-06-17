@@ -10,7 +10,9 @@ import { Transcript } from '../../models/transcript';
 export class TranscriptService {
   httpClient = inject(HttpClient);
   saveUrl = `${ROOT}/transcripts/save`;
-  getUrl = `${ROOT}/transcripts`
+  getUrl = `${ROOT}/transcripts`;
+  deleteUrl = `${ROOT}/transcripts/`;
+
 
   private transcriptsSubject = new BehaviorSubject<Transcript[]>([]);
   transcripts$ = this.transcriptsSubject.asObservable();
@@ -36,11 +38,12 @@ export class TranscriptService {
     this.transcriptsSubject.next(response)
   }
 
-  getTranscriptById(id: string): Observable<Transcript | undefined> {
-    return this.transcripts$.pipe(
-      map(transcripts => transcripts.find(transcript => transcript._id === id))
-    );
+  getTranscriptById(id: string): Observable<any> {
+    return this.httpClient.get(`${this.getUrl}/${id}`)
   }
 
-  constructor() {}
+  deleteTranscriptById(id:string){
+    return this.httpClient.delete(`${this.deleteUrl}${id}`);
+  }
+
 }

@@ -27,6 +27,7 @@ import { Transcript } from '../../models/transcript';
           <p *ngIf="transcript.summary">Summary:<br>{{transcript.summary}}</p>
           <p>{{transcript.createdAt | timeAgo }}</p>
           <button (click)="getDetail(transcript._id)">Details</button>
+          <button (click)="delete(transcript._id)">Delete</button>
           
 
 
@@ -57,6 +58,21 @@ export class TranscriptsComponent implements OnInit,OnDestroy {
 
   getDetail(id:string){
     this.router.navigate(['/transcripts', id])
+  }
+
+  delete(id:string){
+    this.transcriptService.deleteTranscriptById(id).subscribe({
+      next: (response:any) =>{  
+        console.log("successfully deleted", response)
+        this.getTranscripts();
+      },
+      error: (error:any) =>{
+        console.log("error deleting", error)
+      },
+      complete: () =>{
+        console.log("delete finished")
+      }
+    })
   }
 
   getTranscripts(){
