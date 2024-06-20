@@ -10,6 +10,7 @@ import { RouterModule } from '@angular/router';
   template: `
   <section>
        <form [formGroup]="loginForm" (submit)="handleSubmit()">
+        <h1> InfoScript Login </h1>
           <label for="email">
             Email
           </label>
