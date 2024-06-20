@@ -2,25 +2,33 @@ import { Component, OnDestroy, inject } from '@angular/core';
 import { TranscriptService } from '../../services/transcript/transcript.service';
 import { CommonModule } from '@angular/common';
 import { OnInit } from '@angular/core';
-import { Observable, Subject, takeUntil,of, from } from 'rxjs';
+import { Observable, Subject, takeUntil,of, from, map } from 'rxjs';
 import { TimeAgoPipe } from '../../pipes/time-ago.pipe';
 import { Router } from '@angular/router';
 import { Transcript } from '../../models/transcript';
+import { Form, FormControl, ReactiveFormsModule } from '@angular/forms';
+import { Filters } from '../../models/filters';
 
 @Component({
   selector: 'app-transcripts',
   standalone: true,
-  imports: [CommonModule, TimeAgoPipe],
+  imports: [CommonModule, TimeAgoPipe, ReactiveFormsModule],
   template: `
     <p>
       transcripts works!
       
     </p>
     <button (click)="getTranscripts()">Get</button>
-    <ng-container *ngIf="transcripts$ | async as transcripts">
+    <input type="text" [formControl]="searchControl" placeholder="search">
+    <select [formControl]="summaryFilterControl" >
+      <option value="">Show All</option>
+      <option value="hasSummary">Summary</option>
+      <option value="noSummary">No Summary</option>
+    </select>
+
+    <ng-container *ngIf="filteredTranscripts$ | async as transcripts">
       <ul class="transcript-list">
         <li *ngFor="let transcript of transcripts" class="transcript-item">
-          
           <h1>{{transcript.title}}</h1>
           <h3>{{transcript.fileName}}</h3>
           <p>Transcript:<br>{{transcript.transcript}}</p>
@@ -28,9 +36,6 @@ import { Transcript } from '../../models/transcript';
           <p>{{transcript.createdAt | timeAgo }}</p>
           <button (click)="getDetail(transcript._id)">Details</button>
           <button (click)="delete(transcript._id)">Delete</button>
-          
-
-
           <hr>
         </li>
       </ul>
@@ -42,13 +47,26 @@ import { Transcript } from '../../models/transcript';
 export class TranscriptsComponent implements OnInit,OnDestroy {
   transcriptService = inject(TranscriptService);
   router = inject(Router);
-  transcripts$ : Observable<Transcript[]> = this.transcriptService.transcripts$;
   destroy$ = new Subject<void>();
+  transcripts$ : Observable<Transcript[]> = this.transcriptService.transcripts$;
+  filteredTranscripts$ : Observable<Transcript[]> = this.transcripts$;
 
+  searchControl:FormControl<string | null> = new FormControl("");
+  summaryFilterControl:FormControl<string | null> = new FormControl("");
 
 
   ngOnInit():void {
     this.getTranscripts();
+    const controlChanges$ = [
+      this.searchControl.valueChanges,
+      this.summaryFilterControl.valueChanges
+    ]
+
+    controlChanges$.forEach((controlChange)=>{
+      controlChange.pipe(takeUntil(this.destroy$)).subscribe(()=>{
+        this.applyFilters();
+    })
+    })
   }
 
   ngOnDestroy(): void {
@@ -87,6 +105,15 @@ export class TranscriptsComponent implements OnInit,OnDestroy {
         console.log("got transcripts")
       }
     })
+  }
+
+  applyFilters(){
+    const filters: Filters = {
+      searchTerm: this.searchControl.value,
+      summaryFilter: this.summaryFilterControl.value
+    }
+
+    this.filteredTranscripts$ =  this.transcriptService.handleFilters(filters);
   }
 
 }
