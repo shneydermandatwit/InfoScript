@@ -5,6 +5,7 @@ import { RegisterComponent } from './components/register/register.component';
 import { UploadComponent } from './components/upload/upload.component';
 import { authGuard } from './auth/auth.guard';
 import { TranscriptsComponent } from './components/transcripts/transcripts.component';
+import { TranscriptDetailComponent } from './components/transcript-detail/transcript-detail.component';
 
 export const routes: Routes = [
     {
@@ -34,5 +35,11 @@ export const routes: Routes = [
         title: 'Transcripts',
         canActivate: [authGuard]
     },
+    {
+        path: 'transcripts/:id',
+        component: TranscriptDetailComponent,
+        title: 'Transcript Detail',
+        canActivate: [authGuard]
+    }
     
 ];

@@ -3,7 +3,7 @@ import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { inject } from '@angular/core';
 import { UploadService } from '../../services/upload/upload.service';
 import { CommonModule } from '@angular/common';
-import { SaveService } from '../../services/save/save.service';
+import { TranscriptService } from '../../services/transcript/transcript.service';
 import { SaveFormComponent } from '../save-form/save-form.component';
 
 @Component({
@@ -21,14 +21,14 @@ import { SaveFormComponent } from '../save-form/save-form.component';
       <button type="submit" [disabled]="!uploadForm.value.file">Transcribe</button>
       <button (click)="clearForm()">Clear</button>
     </form>
-    <app-save-form *ngIf="this.saveService.transcript"></app-save-form>
+    <app-save-form *ngIf="this.transcriptService.transcript"></app-save-form>
   </div>
   `,
   styleUrl: './upload.component.scss',
 })
 export class UploadComponent {
   uploadService = inject(UploadService);
-  saveService = inject(SaveService);
+  transcriptService = inject(TranscriptService);
 
   @ViewChild('fileElement') fileElement : ElementRef | undefined;
 
