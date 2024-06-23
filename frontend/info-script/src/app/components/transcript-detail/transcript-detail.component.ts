@@ -11,6 +11,7 @@ import { TimeAgoPipe } from '../../pipes/time-ago.pipe';
   imports: [CommonModule, TimeAgoPipe],
   template: `
     <body>
+      <button (click)="return()">Back to transcripts</button>
       <div class="transcript-body">
         <h1 class="title">{{ transcript?.title }}</h1>
         <h3 class="filename">{{ transcript?.fileName }}</h3>
@@ -62,5 +63,9 @@ export class TranscriptDetailComponent implements OnInit {
         console.log('delete finished');
       },
     });
+  }
+
+  return(){
+    this.router.navigate(['/transcripts']);
   }
 }
