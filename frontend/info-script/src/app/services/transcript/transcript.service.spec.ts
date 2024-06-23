@@ -1,12 +1,12 @@
 import { TestBed } from '@angular/core/testing';
 
-import { SaveService } from './save.service';
-describe('SaveService', () => {
-  let service: SaveService;
+import { TranscriptService } from './transcript.service';
+describe('TranscriptService', () => {
+  let service: TranscriptService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(SaveService);
+    service = TestBed.inject(TranscriptService);
   });
 
   it('should be created', () => {

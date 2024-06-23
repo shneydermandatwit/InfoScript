@@ -63,6 +63,29 @@ transcriptsRoute.get('/', async (req, res) => {
     }
 })
 
+transcriptsRoute.get('/:id', async (req, res) => {
+    try {
+
+        const token = req.headers.authorization.split(' ')[1]; // Assuming the token is sent in the format: Bearer <token>
+        const decodedToken = jwt.verify(token, JWT_SECRET);
+        const { email } = decodedToken;
+
+
+        const transcriptID = req.params.id;
+        
+        const transcript = await Transcript.find({creator: email,_id: transcriptID});
+
+        if (transcript.length === 0) {
+            return res.status(404).send({ message: "No reviews found." });
+        }
+        
+        return res.status(200).send(transcript);
+    } catch (error) {
+        console.log(error.message);
+        res.status(500).send({ message: error.message })
+    }
+})
+
 transcriptsRoute.delete('/:id', async (req, res) => {//need to check if the review was created by the user deleting it
     try {
 

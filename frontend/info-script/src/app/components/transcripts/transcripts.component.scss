@@ -1,0 +1,36 @@
+.filters{
+    background-color: lightcyan;
+    padding: 10px;
+    
+    #summaryFilterGroup {
+        display: inline-block;
+        >*{
+            display: flex;
+
+        }
+    }
+    #searchGroup {
+        display: inline-block;
+        >*{
+            display: flex;
+
+        }
+    }
+}
+#transcriptsSection{    
+    margin: 10px;
+    
+    .transcript-list{
+        list-style: none;
+        padding: 0;
+        .transcript-item{
+            border-bottom: solid 1px black;
+            padding: 5px;
+            .preview{
+                width: 50%; 
+                white-space: nowrap;
+                overflow: hidden; 
+                text-overflow: ellipsis;
+        }
+    }
+}}
