@@ -1,5 +1,6 @@
 export interface Filters {
     searchTerm: string | null,
-    //orderBy:string,
-    summaryFilter: string | null
+    summaryFilter: string | null,
+    orderBy: string | null,
+    orderDirection: string | null
 }

@@ -58,6 +58,11 @@ export class TranscriptService {
           filters.summaryFilter,
           filteredTranscripts
         );
+        filteredTranscripts = this.applyOrderBy(
+          filters.orderBy,
+          filters.orderDirection,
+          filteredTranscripts
+        )
         
 
         return filteredTranscripts;
@@ -105,6 +110,29 @@ export class TranscriptService {
           .includes(term.toLowerCase().trim());
       return isMatch;
     });
+    return filteredTranscripts;
+  }
+
+  applyOrderBy(term: string | null, order:string | null,transcripts: Transcript[]){
+    let filteredTranscripts = transcripts;
+    if(term === "" && order === "desc"){//date desc
+      filteredTranscripts.sort((a:Transcript,b: Transcript)=>{
+        return new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime();
+      })
+    }else if(term === "" && order === "asc"){//date asc
+      filteredTranscripts.sort((a:Transcript,b: Transcript)=>{
+        return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
+      })
+    }else if(term === "alphabetical" && order === "desc"){//alphabetical desc
+      filteredTranscripts.sort((a:Transcript, b:Transcript)=>{
+       return a.title.localeCompare(b.title)
+      })
+    }else{//aphabetical asc
+      filteredTranscripts.sort((a:Transcript, b:Transcript)=>{
+        return b.title.localeCompare(a.title)
+      })
+
+    }
     return filteredTranscripts;
   }
 }

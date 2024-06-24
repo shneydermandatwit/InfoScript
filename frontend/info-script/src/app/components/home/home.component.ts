@@ -45,7 +45,7 @@ import { Component } from '@angular/core';
       <div class="container">
         <h2>Get Started with InfoScript</h2>
         <p>Sign up today and start transcribing and summarizing your audio files effortlessly.</p>
-        <a href="/signup" class="btn-primary">Sign Up Now</a>
+        <a href="/register" class="btn-primary">Sign Up Now</a>
       </div>
     </section>
   </main>

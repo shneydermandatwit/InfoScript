@@ -28,6 +28,16 @@ import { Filters } from '../../models/filters';
         <option value="noSummary">No Summary</option>
       </select>
       </div>
+
+      <div id="orderByGroup">
+        <label for="orderBy">Order By</label>
+        <select [formControl]="orderByControl" id="orderBy">
+        <option value="">Date Created</option>
+        <option value="alphabetical">Alphabetically</option>
+      </select>
+      <button id="sortDirection" (click)="toggleSortDirection()">{{sortArrow}}</button>
+
+      </div>
       
     </div>
    
@@ -59,13 +69,19 @@ export class TranscriptsComponent implements OnInit,OnDestroy {
 
   searchControl:FormControl<string | null> = new FormControl("");
   summaryFilterControl:FormControl<string | null> = new FormControl("");
+  orderByControl:FormControl<string | null> = new FormControl("");
+  orderDirectionControl:FormControl<string | null> = new FormControl("desc");
+
+  sortArrow = "↓";
 
 
   ngOnInit():void {
     this.getTranscripts();
     const controlChanges$ = [
       this.searchControl.valueChanges,
-      this.summaryFilterControl.valueChanges
+      this.summaryFilterControl.valueChanges,
+      this.orderByControl.valueChanges,
+      this.orderDirectionControl.valueChanges
     ]
 
     controlChanges$.forEach((controlChange)=>{
@@ -116,10 +132,24 @@ export class TranscriptsComponent implements OnInit,OnDestroy {
   applyFilters(){
     const filters: Filters = {
       searchTerm: this.searchControl.value,
-      summaryFilter: this.summaryFilterControl.value
+      summaryFilter: this.summaryFilterControl.value,
+      orderBy: this.orderByControl.value,
+      orderDirection: this.orderDirectionControl.value
     }
 
     this.filteredTranscripts$ =  this.transcriptService.handleFilters(filters);
+  }
+
+  toggleSortDirection(){
+    if(this.sortArrow == "↓"){
+      this.sortArrow = "↑";
+      this.orderDirectionControl.setValue("asc");
+
+    }else{
+      this.sortArrow = "↓"
+      this.orderDirectionControl.setValue("desc");
+
+    }
   }
 
 }
