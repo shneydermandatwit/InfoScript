@@ -62,7 +62,13 @@ export class TranscriptService {
           filters.orderBy,
           filters.orderDirection,
           filteredTranscripts
+        );
+        filteredTranscripts = this.applyDateFilters(
+          filters.fromDate,
+          filters.toDate,
+          filteredTranscripts
         )
+        
         
 
         return filteredTranscripts;
@@ -70,7 +76,7 @@ export class TranscriptService {
     );
   }
 
-  applySummaryFilter(summaryFilter: string | null, transcripts: Transcript[]):Transcript[] {
+  private applySummaryFilter(summaryFilter: string | null, transcripts: Transcript[]):Transcript[] {
     if(!summaryFilter){
       return transcripts;
     }
@@ -86,7 +92,7 @@ export class TranscriptService {
     return filteredTranscripts;
   }
 
-  applySearch(term: string | null, transcripts: Transcript[]): Transcript[] {
+  private applySearch(term: string | null, transcripts: Transcript[]): Transcript[] {
     if (!term) {
       return transcripts;
     }
@@ -113,7 +119,7 @@ export class TranscriptService {
     return filteredTranscripts;
   }
 
-  applyOrderBy(term: string | null, order:string | null,transcripts: Transcript[]){
+  private applyOrderBy(term: string | null, order:string | null,transcripts: Transcript[]){
     let filteredTranscripts = transcripts;
     if(term === "" && order === "desc"){//date desc
       filteredTranscripts.sort((a:Transcript,b: Transcript)=>{
@@ -127,12 +133,46 @@ export class TranscriptService {
       filteredTranscripts.sort((a:Transcript, b:Transcript)=>{
        return a.title.localeCompare(b.title)
       })
-    }else{//aphabetical asc
+    }else if(term === "alphabetical" && order === "desc"){//aphabetical asc
       filteredTranscripts.sort((a:Transcript, b:Transcript)=>{
         return b.title.localeCompare(a.title)
       })
-
+    }else if(term === "length" && order === "desc"){//length desc
+      filteredTranscripts.sort((a:Transcript, b:Transcript)=>{
+        return b.transcript.length - a.transcript.length;
+      })
+    }else{// length asc
+      filteredTranscripts.sort((a:Transcript, b:Transcript)=>{
+        return a.transcript.length - b.transcript.length;
+      })
     }
+    return filteredTranscripts;
+  }
+
+  private applyDateFilters(from:string|null, to: string|null, transcripts:Transcript[]){
+    const filteredTranscripts = transcripts.filter((transcript)=>{
+      const createdDate:number  = new Date(transcript.createdAt).getTime()
+      let fromDate : number;
+      let toDate : number;
+
+      if(from){
+        fromDate = new Date(from).getTime()
+      }
+      if(to){
+        toDate = new Date(to).getTime()
+      }
+
+      if(from && to){
+        return (createdDate>fromDate! && createdDate<toDate!)
+      }
+      if(from){
+        return (createdDate>fromDate!)
+      }
+      if(to){
+        return (createdDate<fromDate!)
+      }
+      return true;
+    })
     return filteredTranscripts;
   }
 }
