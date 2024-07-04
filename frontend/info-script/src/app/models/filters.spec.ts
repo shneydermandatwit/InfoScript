@@ -2,6 +2,14 @@ import { Filters } from './filters';
 
 describe('Filters', () => {
   it('should create an instance', () => {
-    expect(new Filters()).toBeTruthy();
+    const filters :Filters = {
+      searchTerm : "s",
+      fromDate : "w",
+      toDate : "d",
+      orderBy: "s",
+      orderDirection : "w",
+      summaryFilter : "w"
+    }
+   expect(filters).toBeTruthy();
   });
 });

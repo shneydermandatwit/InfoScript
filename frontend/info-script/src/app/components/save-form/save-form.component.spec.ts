@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SaveFormComponent } from './save-form.component';
+import { provideHttpClient, withInterceptors } from '@angular/common/http';
+import { authInterceptor } from '../../auth/auth.interceptor';
 
 describe('SaveFormComponent', () => {
   let component: SaveFormComponent;
@@ -8,7 +10,10 @@ describe('SaveFormComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [SaveFormComponent]
+      imports: [SaveFormComponent],
+      providers:[
+        provideHttpClient(withInterceptors([authInterceptor]))
+      ]
     })
     .compileComponents();
     
