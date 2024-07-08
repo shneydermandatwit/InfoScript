@@ -10,8 +10,12 @@ import { TimeAgoPipe } from '../../pipes/time-ago.pipe';
   standalone: true,
   imports: [CommonModule, TimeAgoPipe],
   template: `
+  <section>
     <body>
       <button (click)="return()">Back to transcripts</button>
+      <button class="delete-buton" (click)="delete(transcript?._id)">
+          delete
+        </button>
       <div class="transcript-body">
         <h1 class="title">{{ transcript?.title }}</h1>
         <h3 class="filename">{{ transcript?.fileName }}</h3>
@@ -22,11 +26,9 @@ import { TimeAgoPipe } from '../../pipes/time-ago.pipe';
           {{ transcript?.summary }}
         </p>
         <p class="timestamp">{{ transcript?.createdAt | timeAgo }}</p>
-        <button class="delete-buton" (click)="delete(transcript?._id)">
-          delete
-        </button>
       </div>
     </body>
+  </section>
   `,
   styleUrl: './transcript-detail.component.scss',
 })

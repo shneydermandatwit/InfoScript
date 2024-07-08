@@ -1,5 +1,10 @@
+section {
+    height: 100vh;
+    background-color: black;
+}
+
 .filters{
-    background-color: lightcyan;
+    background-color: black;
     padding: 10px;
     
     #summaryFilterGroup {
@@ -18,19 +23,70 @@
     }
 }
 #transcriptsSection{    
-    margin: 10px;
+    margin: 0 20px;
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
     
     .transcript-list{
+        width: 100%;
         list-style: none;
         padding: 0;
+        display: flex;
+        flex-wrap: wrap;
+     //   margin: 5px;
+        background-color: black;
+      //  flex-direction: start;
+      //  justify-content: center;
         .transcript-item{
-            border-bottom: solid 1px black;
+            display: flex;
+            flex-direction: start;
+            width: 20%;
+            height: 35vh;
+            background-color: white;
+            .transcript-info{
+            display: flex;
+            flex-direction: column;
+            text-align: center;
+            border: solid 5px black;
+          //  border-radius: 10px;
+            border-spacing: 0px;
+            border-collapse: separate;
             padding: 5px;
+            width: 100%;
+           // height: 100%;
+            //margin: 0 auto;
+            h2{
+                font-size: 15px;
+            }
             .preview{
-                width: 50%; 
-                white-space: nowrap;
+               // width: 50%;
+                height: 60px; 
+                display: -webkit-box;
+                -webkit-box-orient: vertical;
+                -webkit-line-clamp: 6;
+              //  white-space: nowrap;
                 overflow: hidden; 
                 text-overflow: ellipsis;
+                border: solid;
+                border-width: 1px;
+                border-radius: 10px;
+                padding: 0 0 50px 0;
+                margin: 5px;
+                font-size: 10px;
+                box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, .5);
+        }
+        .time{
+            margin-top: auto;
+            font-size: 12px;
+        }
+        .transcript-buttons{
+            margin-top: auto;
         }
     }
+}
 }}
+

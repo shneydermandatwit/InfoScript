@@ -1,4 +1,9 @@
 /* Reset default styles */
+section{
+  height: 100vh;
+  padding-top: 50px;
+  background: linear-gradient(#040805, #351787);
+}
 * {
     margin: 0;
     padding: 0;
@@ -12,9 +17,10 @@
   }
   
   /* Container styles */
-  #upload-container {
+ .upload {
     max-width: 600px;
-    margin: 50px auto;
+    //height: 35%;
+    margin: 0 auto;
     background-color: #fff;
     padding: 20px;
     border-radius: 8px;
@@ -28,14 +34,17 @@
   }
   
   
-  
+  button{
+    margin: auto 0;
+    margin-top: 10px;
+  }
   label[for="summarize"] {
     margin-bottom: 10px;
     font-weight: bold;
   }
   
   button[type="submit"] {
-    background-color: #007bff;
+    background-color: #351787;
     color: #fff;
     border: none;
     padding: 10px 20px;
@@ -45,7 +54,7 @@
   }
   
   button[type="submit"]:hover {
-    background-color: #0056b3;
+    background-color: #040805;
   }
   
   /* Response styles */
@@ -71,6 +80,7 @@
     display: flex;
     align-items: start;
     justify-content: start;
+    margin-top: 10px;
     input{
         margin: auto 0;
     }
@@ -82,7 +92,7 @@
 
 
 input[type="file"]{
-    margin: 0;
+    margin-top: 10px;
 }
 
 button[type="submit"]:disabled {
