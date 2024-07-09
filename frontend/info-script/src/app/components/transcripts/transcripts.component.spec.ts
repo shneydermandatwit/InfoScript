@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { TranscriptsComponent } from './transcripts.component';
+import { provideHttpClient, withInterceptors } from '@angular/common/http';
+import { authInterceptor } from '../../auth/auth.interceptor';
 
 describe('TranscriptsComponent', () => {
   let component: TranscriptsComponent;
@@ -8,7 +10,10 @@ describe('TranscriptsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [TranscriptsComponent]
+      imports: [TranscriptsComponent],
+      providers:[
+        provideHttpClient(withInterceptors([authInterceptor]))
+      ]
     })
     .compileComponents();
     

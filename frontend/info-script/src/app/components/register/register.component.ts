@@ -1,7 +1,8 @@
 import { Component,inject } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { UserService } from '../../services/user/user.service';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
+import { OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-register',
@@ -33,7 +34,14 @@ import { RouterModule } from '@angular/router';
   `,
   styleUrl: './register.component.scss'
 })
-export class RegisterComponent {
+export class RegisterComponent implements OnInit {
+router = inject(Router);
+
+  ngOnInit(): void {
+      if(this.userService.isLoggedIn()){
+        this.router.navigate(['transcripts'])
+      }
+  }
 
   registerForm = new FormGroup({
     email: new FormControl(''),
