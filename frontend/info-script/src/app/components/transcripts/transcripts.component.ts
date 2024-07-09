@@ -14,6 +14,7 @@ import { Filters } from '../../models/filters';
   standalone: true,
   imports: [CommonModule, TimeAgoPipe, ReactiveFormsModule],
   template: `
+  <section>
     <div class="filters">
       <div id="searchGroup">
         <label for="searchBox">Search</label>
@@ -54,28 +55,30 @@ import { Filters } from '../../models/filters';
       </div>
     </div>
 
-    <div id="transcriptsSection">
-      <ng-container *ngIf="filteredTranscripts$ | async as transcripts">
-        <ul class="transcript-list">
-          <li *ngFor="let transcript of transcripts" class="transcript-item">
-            <h1>{{ transcript.title }}</h1>
-            <h3>{{ transcript.fileName }}</h3>
-            <h2>Transcript text:</h2>
-            <p class="preview">{{ transcript.transcript }}</p>
-            <h2>Summary text:</h2>
-            <p *ngIf="transcript.summary" class="preview">
-              {{ transcript.summary }}
-            </p>
-            <p>
-              {{ transcript.createdAt | timeAgo }} -
-              {{ transcript.createdAt | date }}
-            </p>
-            <button (click)="getDetail(transcript._id)">Details</button>
-            <button (click)="delete(transcript._id)">Delete</button>
-          </li>
-        </ul>
-      </ng-container>
-    </div>
+  
+    <div id="transcriptsSection"><ng-container *ngIf="filteredTranscripts$ | async as transcripts">
+      <ul class="transcript-list">
+        <li *ngFor="let transcript of transcripts" class="transcript-item">
+          <div class="transcript-info">
+          <h1>{{transcript.title}}</h1>
+   <!--       <h3>{{transcript.fileName}}</h3> -->
+   <!--       <h2>Transcript text:</h2> -->
+          <p class="preview">{{transcript.transcript}}</p>
+    <!--      <h2 *ngIf="transcript.summary">Summary text:</h2> -->
+     <!--     <p *ngIf="transcript.summary" class="preview">{{transcript.summary}}</p> -->
+          <div class="time">
+          <p>{{transcript.createdAt | timeAgo }} - {{transcript.createdAt | date}}</p>
+          </div>
+          <div class="transcript-buttons">
+          <button (click)="getDetail(transcript._id)">Details</button>
+          <button (click)="delete(transcript._id)">Delete</button>
+          </div>
+          </div>
+        </li>
+      </ul>
+    </ng-container></div>
+</section>
+    
   `,
   styleUrl: './transcripts.component.scss',
 })

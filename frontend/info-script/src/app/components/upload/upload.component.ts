@@ -11,7 +11,8 @@ import { SaveFormComponent } from '../save-form/save-form.component';
   standalone: true,
   imports: [ReactiveFormsModule,CommonModule, SaveFormComponent],
   template: `
-  <div id="upload-container">
+  <section>
+  <div class="upload">
   <form [formGroup]="uploadForm" (ngSubmit)="uploadFile()" id="uploadForm">
       <input type="file" (change)="onFileSelected($event)" accept="audio/*" #fileElement/>
       <div class="checkbox-div">
@@ -22,7 +23,8 @@ import { SaveFormComponent } from '../save-form/save-form.component';
       <button (click)="clearForm()">Clear</button>
     </form>
     <app-save-form *ngIf="this.transcriptService.transcript"></app-save-form>
-  </div>
+</div>
+</section>
   `,
   styleUrl: './upload.component.scss',
 })
