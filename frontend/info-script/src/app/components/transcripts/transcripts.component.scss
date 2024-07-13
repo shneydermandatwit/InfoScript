@@ -29,14 +29,15 @@ section {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background-color: white;
     
     .transcript-list{
-        width: 100%;
+        width: 90%;
+        margin-left: auto;
         list-style: none;
         padding: 0;
         display: flex;
         flex-wrap: wrap;
+        gap: 20px;
      //   margin: 5px;
         background-color: black;
       //  flex-direction: start;
@@ -51,7 +52,7 @@ section {
             display: flex;
             flex-direction: column;
             text-align: center;
-            border: solid 5px black;
+            //border: solid 5px black;
           //  border-radius: 10px;
             border-spacing: 0px;
             border-collapse: separate;
