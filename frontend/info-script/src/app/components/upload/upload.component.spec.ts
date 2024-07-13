@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { UploadComponent } from './upload.component';
+import { provideHttpClient, withInterceptors } from '@angular/common/http';
+import { authInterceptor } from '../../auth/auth.interceptor';
 
 describe('UploadComponent', () => {
   let component: UploadComponent;
@@ -8,7 +10,10 @@ describe('UploadComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [UploadComponent]
+      imports: [UploadComponent],
+      providers:[
+        provideHttpClient(withInterceptors([authInterceptor]))
+      ]
     })
     .compileComponents();
     

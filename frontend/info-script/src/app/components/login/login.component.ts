@@ -1,7 +1,7 @@
-import { Component, inject } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { UserService } from '../../services/user/user.service';
-import { RouterModule } from '@angular/router';
+import { RouterModule, Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -33,7 +33,15 @@ import { RouterModule } from '@angular/router';
   `,
   styleUrl: './login.component.scss'
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit{
+
+  router = inject(Router);
+
+  ngOnInit(): void {
+      if(this.userService.isLoggedIn()){
+        this.router.navigate(['transcripts'])
+      }
+  }
 
   loginForm = new FormGroup({
     email: new FormControl(''),
