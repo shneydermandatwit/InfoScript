@@ -16,7 +16,7 @@ import { Filters } from '../../models/filters';
   template: `
   <section>
     <div class="filters">
-      <div id="searchGroup">
+      <div id="filterGroup">
         <label for="searchBox">Search</label>
         <input
           type="text"
@@ -26,8 +26,8 @@ import { Filters } from '../../models/filters';
         />
       </div>
 
-      <div id="summaryFilterGroup">
-        <label for="summaryFilter">Summary Filter</label>
+      <div id="filterGroup">
+        <label for="summaryFilter">Summary</label>
         <select [formControl]="summaryFilterControl" id="summaryFilter">
           <option value="">Show All</option>
           <option value="hasSummary">Summary</option>
@@ -35,14 +35,17 @@ import { Filters } from '../../models/filters';
         </select>
       </div>
 
-      <div id="dateFilterGroup">
+      <div id="filterGroup">
         <label for="fromDate">From Date</label>
         <input id="fromDate" type="datetime-local" [formControl]="fromDateFilter">
-        <label for="toDate">To Date</label>
-        <input id="toDate" type="datetime-local" [formControl]="toDateFilter">
       </div>
 
-      <div id="orderByGroup">
+      <div id="filterGroup">
+      <label for="toDate">To Date</label>
+      <input id="toDate" type="datetime-local" [formControl]="toDateFilter">
+      </div>
+
+      <div id="filterGroup">
         <label for="orderBy">Order By</label>
         <select [formControl]="orderByControl" id="orderBy">
           <option value="">Date Created</option>

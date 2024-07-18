@@ -16,6 +16,7 @@ body {
   background: linear-gradient($background-color, $background-color, #351787);
 //  background-color: $background-color;
   line-height: 1.6;
+  padding-top: 70px;
 }
 
 // Container
@@ -23,6 +24,9 @@ body {
   width: 80%;
   margin: 0 auto;
   padding: 20px;
+  padding-bottom: 20px;
+  margin-bottom: 20px;
+  overflow: hidden;
 }
 
 // Header
@@ -32,7 +36,7 @@ header {
  // background-size: cover;
   color: #fff;
   padding: 40px 0;
-  height: 400px;
+  height: 10%;
   text-align: center;
 
   h1 {
@@ -61,10 +65,16 @@ header {
   }
 }
 
-#photo div img {
+#photo{
+  height: 10%;
+  overflow: hidden;
+}
+
+#photo img{
+  object-fit: cover;
   height: 100%;
   width: 100%;
-  object-fit: cover;
+  max-height: 100%;
 }
 
 // Features Section

@@ -1,12 +1,46 @@
 section{
     height: 100vh;
+    padding-top: 70px;
+    background-color: black;
+    background: linear-gradient(#040805, #351787);
+}
+body{
+    height: 80%;
+    width: 80%;
+    margin: 0 auto;
+    background-color: white;
+}
+button{
+    margin: 0 5px;
+    background-color: black;
+    color: white;
+    border: solid 1px white;
+    padding: 5px;
+    border-radius: 5000px;
 }
 
 .transcript-body{
     height: 100%;
+    padding: 10px;
 }
 
 .title{
-    margin-bottom: 20px;
+    margin: 0 0 20px 10px;
     font-size: 32px;
+    color: white;
+}
+
+.transcript{
+    margin-top: 10px;
+    margin-bottom: 10px;
+    .transcript-text{
+        margin-left: 10px;
+    }
+}
+
+.summary{
+    margin-bottom: 10px;
+    .transcript-summary{
+        margin-left: 10px;
+    }
 }

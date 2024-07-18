@@ -11,20 +11,26 @@ import { TimeAgoPipe } from '../../pipes/time-ago.pipe';
   imports: [CommonModule, TimeAgoPipe],
   template: `
   <section>
-    <body>
-      <button (click)="return()">Back to transcripts</button>
-      <button class="delete-buton" (click)="delete(transcript?._id)">
+    <header>
+    <button (click)="return()">Back to transcripts</button>
+      <button class="delete-button" (click)="delete(transcript?._id)">
           delete
         </button>
-      <div class="transcript-body">
         <h1 class="title">{{ transcript?.title }}</h1>
+    </header>
+    <body>
+      <div class="transcript-body">
         <h3 class="filename">{{ transcript?.fileName }}</h3>
+        <div class="transcript">
         <h3>Transcript:</h3>
         <p class="transcript-text">{{ transcript?.transcript }}</p>
+        </div>
+        <div class="summary" *ngIf="transcript?.summary">
         <h3>Summary:</h3>
-        <p class="transcript-summary" *ngIf="transcript?.summary">
+        <p class="transcript-summary">
           {{ transcript?.summary }}
         </p>
+        </div>
         <p class="timestamp">{{ transcript?.createdAt | timeAgo }}</p>
       </div>
     </body>

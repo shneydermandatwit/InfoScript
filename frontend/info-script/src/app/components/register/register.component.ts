@@ -22,7 +22,7 @@ import { OnInit } from '@angular/core';
           <label for="password">
             Password
           </label>
-          <input id="password" type="text" formControlName="password">
+          <input id="password" type="password" formControlName="password">
         <button type="submit" class="primary">Register</button>
         <br>
         <a [routerLink]="['/login']">
