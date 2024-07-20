@@ -1,18 +1,27 @@
 section {
     height: 100vh;
-    background-color: black;
+    padding-top: 70px;
+    background: linear-gradient(#040805, #351787);
 }
 
 .filters{
-    background-color: black;
+    color: white;
+    display: flex;
     padding: 10px;
     
-    #summaryFilterGroup {
+    #filterGroup {
         display: inline-block;
         >*{
             display: flex;
 
         }
+        #orderBy{
+            display: inline;
+        }
+        #sortDirection{
+            display: inline;
+        }
+        margin-left: 5px;
     }
     #searchGroup {
         display: inline-block;
@@ -29,16 +38,17 @@ section {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background-color: white;
     
     .transcript-list{
-        width: 100%;
+        width: 90%;
+        margin-left: auto;
         list-style: none;
         padding: 0;
         display: flex;
         flex-wrap: wrap;
+        gap: 20px;
      //   margin: 5px;
-        background-color: black;
+     //   background-color: black;
       //  flex-direction: start;
       //  justify-content: center;
         .transcript-item{
@@ -47,11 +57,12 @@ section {
             width: 20%;
             height: 35vh;
             background-color: white;
+            border-radius: 10px;
             .transcript-info{
             display: flex;
             flex-direction: column;
             text-align: center;
-            border: solid 5px black;
+            //border: solid 5px black;
           //  border-radius: 10px;
             border-spacing: 0px;
             border-collapse: separate;
@@ -74,7 +85,7 @@ section {
                 border: solid;
                 border-width: 1px;
                 border-radius: 10px;
-                padding: 0 0 50px 0;
+                padding: 0 5px 50px 5px;
                 margin: 5px;
                 font-size: 10px;
                 box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, .5);
@@ -85,6 +96,14 @@ section {
         }
         .transcript-buttons{
             margin-top: auto;
+            button{
+            background-color: #351787;
+            color: white;
+            border: none;
+            margin: 0 5px 0 5px;
+            border-radius: 5000px;
+            padding: 5px 10px 5px 10px;
+            }
         }
     }
 }

@@ -24,7 +24,10 @@ nav{
     padding: 5px;
     display: flex;
    // box-shadow: 0px 5px 25px $shadow;
-    background-color: #040805;
+//    background-color: #040805;
+    position: fixed;
+    top: 0;
+    width: 100%;
 }
 
 .name {

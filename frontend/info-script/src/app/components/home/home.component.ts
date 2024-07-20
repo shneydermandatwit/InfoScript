@@ -13,11 +13,9 @@ import { Component } from '@angular/core';
     </div>
   </header>
   <main>
-    <section id="photo">
-      <div>
-        <img src = "https://www.onlygfx.com/wp-content/uploads/2022/03/colorful-sound-wave-equalizer-4.png">
+    <div id="photo">
+      <img src="https://www.onlygfx.com/wp-content/uploads/2022/03/colorful-sound-wave-equalizer-4.png">
         </div>
-      </section>
     <section id="features">
       <div class="container">
         <h2>Features</h2>
