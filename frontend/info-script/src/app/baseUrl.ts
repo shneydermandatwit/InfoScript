@@ -1,1 +1,1 @@
-export const ROOT = "http://localhost:5556"
+export const ROOT = "https://infoscript.onrender.com"
