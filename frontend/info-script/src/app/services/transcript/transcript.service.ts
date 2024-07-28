@@ -51,4 +51,10 @@ export class TranscriptService {
   handleFilters(filters:Filters){
     return this.transcriptFilterService.handleFilters(this.transcripts$,filters);
   }
+
+  clearForm(){
+    this.fileName = "";
+    this.summary = "";
+    this.transcript = "";
+  }
 }
