@@ -99,3 +99,11 @@ button[type="submit"]:disabled {
   background-color: #cccccc; /* Grey color */
   cursor: not-allowed; /* Change cursor to not-allowed */
 }
+
+.loadingWrapper{
+  .loadingIcon{
+    width: 30%;
+    margin: auto;
+  }
+  display: flex;
+}
