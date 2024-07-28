@@ -23,7 +23,7 @@ import { SaveFormComponent } from '../save-form/save-form.component';
       <button (click)="clearForm()">Clear</button>
     </form>
     <app-save-form *ngIf="this.transcriptService.transcript"></app-save-form>
-    <div class="loadingWrapper" *ngIf="!this.loading">
+    <div class="loadingWrapper" *ngIf="this.loading">
     <img class="loadingIcon" src="Untitled_Artwork.gif">
 
     </div>
