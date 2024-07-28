@@ -21,9 +21,6 @@ import { inject } from '@angular/core';
         </div>
       
       <div class="account-options">
-        <div class="clickable">
-          <a> About </a>
-          </div>
         @if(!isLoggedIn){
           
         <div class="clickable">
